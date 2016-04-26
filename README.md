@@ -19,7 +19,7 @@ npm install now-serve -g
 Run it
 
 ```bash
-ns <file | dir> [options]
+ns [options] <file | dir>
 ```
 
 You can find a list of all options [below](#options).
