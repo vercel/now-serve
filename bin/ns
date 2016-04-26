@@ -84,13 +84,9 @@ walker.on('errors', (root, nodeStatsArray, next) => {
   next()
 })
 
-const injectPackage = path => {
-  try {
-    fs.writeJSONSync(path, pkgDefaults)
-  } catch (err) {
-    throw err
-  }
-}
+const injectPackage = path => fs.writeJSON(path, pkgDefaults, err => {
+  if (err) throw err
+})
 
 const modifyExistingPkg = path => {
   let content
@@ -111,12 +107,10 @@ const modifyExistingPkg = path => {
   }
 }
 
-const cleanup = () => {
-  fs.remove(tmpDir.name, err => {
-    if (err) throw err
-    process.exit()
-  })
-}
+const cleanup = () => fs.remove(tmpDir.name, err => {
+  if (err) throw err
+  process.exit()
+})
 
 walker.on('end', () => {
   const pkgPath = path.join(tmpDir.name, 'package.json')
