@@ -25,7 +25,7 @@ You can find a list of all options below:
 | -h, --help             | Output all available options |
 | -V, --version          | The version tag of the now-serve instance on your device |
 | -c, --cmd [command]    | The command that should be run when starting |
-| -p, --packages <names> | A list of custom packages to add to dependencies |
+| -p, --packages &#60;names&#62; | A list of custom packages to add to dependencies |
 
 ## Contribute
 
