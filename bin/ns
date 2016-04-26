@@ -64,19 +64,40 @@ walker.on('errors', (root, nodeStatsArray, next) => {
   next()
 })
 
-const injectPackage = (path) => {
+const injectPackage = path => {
   try {
-    fs.writeJSONSync(pkgPath, pkgDefaults)
+    fs.writeJSONSync(path, pkgDefaults)
+  } catch (err) {
+    throw err
+  }
+}
+
+const modifyExistingPkg = path => {
+  let content
+
+  try {
+    content = fs.readFileSync(path, 'utf8')
   } catch (err) {
     throw err
   }
 
-  return true
+  content = JSON.parse(content)
+  Object.assign(content, pkgDefaults)
+
+  try {
+    fs.writeJSONSync(path, content)
+  } catch (err) {
+    throw err
+  }
 }
 
 walker.on('end', () => {
-  if (!hasPackage) {
-    injectPackage(path.join(tmpDir.name, 'package.json'))
+  const pkgPath = path.join(tmpDir.name, 'package.json')
+
+  if (hasPackage) {
+    modifyExistingPkg(pkgPath)
+  } else {
+    injectPackage(pkgPath)
   }
 
   let oldCwd = process.cwd()
