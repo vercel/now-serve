@@ -22,7 +22,7 @@ let pkgDefaults = {
   name: 'ns',
   version: '1.0.0',
   scripts: {
-    start: bin.cmd || 'serve'
+    start: bin.cmd || 'serve ./content'
   },
   dependencies: {
     'serve': 'latest'
@@ -65,7 +65,7 @@ const walker = walk(process.cwd(), {
 
 walker.on('file', (root, fileStats, next) => {
   const file = path.join(root, fileStats.name),
-        target = path.join(tmpDir.name, path.relative(process.cwd(), file))
+        target = path.join(tmpDir.name + '/content', path.relative(process.cwd(), file))
 
   fs.copy(file, target, err => {
     if (err) throw err
