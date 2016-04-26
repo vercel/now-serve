@@ -7,6 +7,9 @@
     "start": "gulp",
     "prepublish": "gulp transpile"
   },
+  "files": [
+    "dist"
+  ],
   "babel": {
     "presets": [
       "es2015"
