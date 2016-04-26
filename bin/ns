@@ -36,7 +36,9 @@ if (bin.packages) {
     pkgDefaults.dependencies[item] = 'latest'
   }
 
-  delete pkgDefaults.dependencies['http-server']
+  if (bin.cmd) {
+    delete pkgDefaults.dependencies['http-server']
+  }
 }
 
 const ignore = [
