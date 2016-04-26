@@ -109,7 +109,7 @@ walker.on('end', () => {
 
   process.on('SIGINT', () => {
     now.kill('SIGINT')
-    process.exit(0)
+    process.exit()
   })
 
   now.on('exit', () => {
