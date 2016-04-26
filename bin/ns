@@ -1,5 +1,17 @@
 #!/usr/bin/env node
 
 import fs from 'fs-extra'
+import tmp from 'tmp'
+import md5 from 'md5'
+import path from 'path'
 
-console.log('test')
+const current = path.parse(process.cwd())
+const uniqueIdentifier = md5(current)
+
+let pkgDefaults = {
+  name: 'ns',
+  version: '1.0.0',
+  scripts: {
+    start: 'http-server'
+  }
+}
