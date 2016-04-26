@@ -103,15 +103,21 @@ walker.on('end', () => {
   let oldCwd = process.cwd()
   process.chdir(tmpDir.name)
 
-  spawn('now', [], {
+  const now = spawn('now', [], {
     stdio: 'inherit'
   })
 
-  /*
-  process.chdir(oldCwd)
-
-  fs.remove(tmpDir.name, err => {
-    if (err) throw err
+  process.on('SIGINT', () => {
+    now.kill('SIGINT')
+    process.exit(0)
   })
-  */
+
+  now.on('exit', () => {
+    fs.remove(tmpDir.name, err => {
+      if (err) throw err
+    })
+
+    process.chdir(oldCwd)
+    process.exit()
+  })
 })
