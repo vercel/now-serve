@@ -64,13 +64,13 @@ try {
   throw err
 }
 
-const pathDetails = fs.lstatSync(current)
+const details = fs.lstatSync(current)
 
-if (pathDetails.isDirectory()) {
+if (details.isDirectory()) {
   copyContents(current, tmpDir.name, pkgDefaults)
-} else if (pathDetails.isFile()) {
-  const fileName = path.parse(current).base
-  const target = path.join(tmpDir.name, '/content', fileName)
+} else if (details.isFile()) {
+  const fileName = path.parse(current).base,
+        target = path.join(tmpDir.name, '/content', fileName)
 
   fs.copy(current, target, err => {
     if (err) throw err
