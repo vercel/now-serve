@@ -13,5 +13,34 @@ let pkgDefaults = {
   version: '1.0.0',
   scripts: {
     start: 'http-server'
+  },
+  dependencies: {
+    'http-server': 'latest'
   }
 }
+
+const pkgContent = JSON.stringify(pkgDefaults, null, 2)
+let tmpDir = false
+
+try {
+  tmpDir = tmp.dirSync({
+    name: `now-serve-${uniqueIdentifier}`,
+    keep: true
+  })
+} catch (err) {
+  throw err
+}
+
+const pkgPath = path.join(tmpDir.name, 'package.json')
+
+try {
+  fs.writeJSONSync(pkgPath, pkgDefaults)
+} catch (err) {
+  throw err
+}
+
+setTimeout(() => {
+  fs.remove(tmpDir.name, err => {
+    if (err) throw err
+  })
+}, 10000)
