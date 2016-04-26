@@ -12,7 +12,7 @@ import pkg from '../package.json'
 bin
   .version(pkg.version)
   .option('-c, --cmd [command]', 'The command to run when starting')
-  .option('-p, --package [package-name]', 'Custom package to add to dependencies')
+  .option('-p, --packages <items>', 'Custom packages to add to dependencies')
   .parse(process.argv)
 
 const current = path.parse(process.cwd()),
@@ -24,10 +24,20 @@ let pkgDefaults = {
   scripts: {
     start: bin.cmd || 'http-server'
   },
-  dependencies: {}
+  dependencies: {
+    'http-server': 'latest'
+  }
 }
 
-pkgDefaults.dependencies[bin.cmd || 'http-server'] = 'latest'
+if (bin.packages) {
+  let list = bin.packages.split(',')
+
+  for (let item of list) {
+    pkgDefaults.dependencies[item] = 'latest'
+  }
+
+  delete pkgDefaults.dependencies['http-server']
+}
 
 const ignore = [
   'node_modules'
