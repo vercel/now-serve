@@ -35,6 +35,7 @@
     "gulp-chmod": "^1.3.0"
   },
   "dependencies": {
+    "commander": "^2.9.0",
     "fs-extra": "^0.28.0",
     "md5": "^2.1.0",
     "tmp": "0.0.28",

@@ -6,6 +6,14 @@ import md5 from 'md5'
 import path from 'path'
 import { spawn } from 'child_process'
 import { walk } from 'walk'
+import bin from 'commander'
+import pkg from '../package.json'
+
+bin
+  .version(pkg.version)
+  .option('-c, --cmd [command]', 'The command to run when starting')
+  .option('-p, --package [package-name]', 'Custom package to add to dependencies')
+  .parse(process.argv)
 
 const current = path.parse(process.cwd()),
       uniqueIdentifier = md5(current)
@@ -14,12 +22,12 @@ let pkgDefaults = {
   name: 'ns',
   version: '1.0.0',
   scripts: {
-    start: 'http-server'
+    start: bin.cmd || 'http-server'
   },
-  dependencies: {
-    'http-server': 'latest'
-  }
+  dependencies: {}
 }
+
+pkgDefaults.dependencies[bin.cmd || 'http-server'] = 'latest'
 
 const ignore = [
   'node_modules'
