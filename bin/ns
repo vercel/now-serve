@@ -111,6 +111,13 @@ const modifyExistingPkg = path => {
   }
 }
 
+const cleanup = () => {
+  fs.remove(tmpDir.name, err => {
+    if (err) throw err
+    process.exit()
+  })
+}
+
 walker.on('end', () => {
   const pkgPath = path.join(tmpDir.name, 'package.json')
 
@@ -129,15 +136,11 @@ walker.on('end', () => {
 
   now.on('exit', () => {
     process.chdir(oldCwd)
-
-    fs.remove(tmpDir.name, err => {
-      if (err) throw err
-      process.exit()
-    })
+    cleanup()
   })
 
   process.on('SIGINT', () => {
     now.kill('SIGINT')
-    process.exit()
+    cleanup()
   })
 })
