@@ -113,11 +113,11 @@ walker.on('end', () => {
   })
 
   now.on('exit', () => {
+    process.chdir(oldCwd)
+
     fs.remove(tmpDir.name, err => {
       if (err) throw err
+      process.exit()
     })
-
-    process.chdir(oldCwd)
-    process.exit()
   })
 })
