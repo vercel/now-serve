@@ -15,7 +15,7 @@
     ]
   },
   "bin": {
-    "ns": "dist/ns"
+    "ns": "dist/bin/ns"
   },
   "repository": {
     "type": "git",

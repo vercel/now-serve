@@ -8,6 +8,7 @@ import { spawn } from 'child_process'
 import { walk } from 'walk'
 import bin from 'commander'
 import pkg from '../package.json'
+import { exists } from '../lib/utils'
 
 bin
   .version(pkg.version)
@@ -15,8 +16,19 @@ bin
   .option('-p, --packages <items>', 'Custom packages to add to dependencies')
   .parse(process.argv)
 
-const current = path.parse(process.cwd()),
-      uniqueIdentifier = md5(current)
+const file = bin.args[bin.args.length - 1]
+let current = process.cwd()
+
+if (file) {
+  current = path.resolve(process.cwd(), file)
+}
+
+if (!exists(current)) {
+  console.error('Specified path doesn\'t exist!')
+  process.exit(1)
+}
+
+const uniqueIdentifier = md5(current)
 
 let pkgDefaults = {
   name: 'ns',
