@@ -107,11 +107,6 @@ walker.on('end', () => {
     stdio: 'inherit'
   })
 
-  process.on('SIGINT', () => {
-    now.kill('SIGINT')
-    process.exit()
-  })
-
   now.on('exit', () => {
     process.chdir(oldCwd)
 
@@ -119,5 +114,10 @@ walker.on('end', () => {
       if (err) throw err
       process.exit()
     })
+  })
+
+  process.on('SIGINT', () => {
+    now.kill('SIGINT')
+    process.exit()
   })
 })
