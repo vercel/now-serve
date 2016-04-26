@@ -22,10 +22,10 @@ let pkgDefaults = {
   name: 'ns',
   version: '1.0.0',
   scripts: {
-    start: bin.cmd || 'http-server'
+    start: bin.cmd || 'serve'
   },
   dependencies: {
-    'http-server': 'latest'
+    'serve': 'latest'
   }
 }
 
