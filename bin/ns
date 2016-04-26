@@ -76,4 +76,7 @@ if (pathDetails.isDirectory()) {
     if (err) throw err
     injectPackage(tmpDir.name, pkgDefaults)
   })
+} else {
+  console.error(chalk.red('Path is neither a file nor a directory!'))
+  process.exit(1)
 }
