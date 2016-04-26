@@ -78,5 +78,4 @@ if (details.isDirectory()) {
   })
 } else {
   console.error(chalk.red('Path is neither a file nor a directory!'))
-  process.exit(1)
 }
