@@ -4,12 +4,10 @@ import fs from 'fs-extra'
 import tmp from 'tmp'
 import md5 from 'md5'
 import path from 'path'
-import { spawn } from 'child_process'
-import { walk } from 'walk'
 import bin from 'commander'
+import { copyContents, exists, injectPackage } from '../lib/utils'
 import chalk from 'chalk'
 import pkg from '../../package.json'
-import { exists } from '../lib/utils'
 
 bin
   .version(pkg.version)
@@ -54,10 +52,6 @@ if (bin.packages) {
   }
 }
 
-const ignore = [
-  'node_modules'
-]
-
 const pkgContent = JSON.stringify(pkgDefaults, null, 2)
 let tmpDir = false
 
@@ -70,53 +64,16 @@ try {
   throw err
 }
 
-const walker = walk(process.cwd(), {
-  filters: [
-    'node_modules'
-  ]
-})
+const pathDetails = fs.lstatSync(current)
 
-walker.on('file', (root, fileStats, next) => {
-  const file = path.join(root, fileStats.name),
-        target = path.join(tmpDir.name + '/content', path.relative(process.cwd(), file))
+if (pathDetails.isDirectory()) {
+  copyContents(current, tmpDir.name, pkgDefaults)
+} else if (pathDetails.isFile()) {
+  const fileName = path.parse(current).base
+  const target = path.join(tmpDir.name, '/content', fileName)
 
-  fs.copy(file, target, err => {
+  fs.copy(current, target, err => {
     if (err) throw err
-    next()
+    injectPackage(tmpDir.name, pkgDefaults)
   })
-})
-
-walker.on('errors', (root, nodeStatsArray, next) => {
-  console.error(`Not able to copy file: ${nodeStatsArray}`)
-  next()
-})
-
-const cleanup = () => fs.remove(tmpDir.name, err => {
-  if (err) throw err
-  process.exit()
-})
-
-walker.on('end', () => {
-  const pkgPath = path.join(tmpDir.name, 'package.json')
-
-  fs.writeJSON(pkgPath, pkgDefaults, err => {
-    if (err) throw err
-  })
-
-  let oldCwd = process.cwd()
-  process.chdir(tmpDir.name)
-
-  const now = spawn('now', [], {
-    stdio: 'inherit'
-  })
-
-  now.on('exit', () => {
-    process.chdir(oldCwd)
-    cleanup()
-  })
-
-  process.on('SIGINT', () => {
-    now.kill('SIGINT')
-    cleanup()
-  })
-})
+}
