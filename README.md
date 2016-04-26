@@ -34,4 +34,4 @@ You can find a list of all options below:
 3. Link it to the global module directory: `npm link`
 4. Transpile the source code and watch for changes: `gulp`
 
-Yeeha! Now can use the ´ns` command everywhere.
+Yeeha! Now can use the `ns` command everywhere.
