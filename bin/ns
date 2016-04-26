@@ -59,18 +59,28 @@ walker.on('file', (root, fileStats, next) => {
   })
 })
 
-walker.on('end', () => {
-  console.log(hasPackage)
+walker.on('errors', (root, nodeStatsArray, next) => {
+  console.error(`Not able to copy file: ${nodeStatsArray}`)
+  next()
 })
 
-/*
-const pkgPath = path.join(tmpDir.name, 'package.json')
+const injectPackage = (path) => {
+  try {
+    fs.writeJSONSync(pkgPath, pkgDefaults)
+  } catch (err) {
+    throw err
+  }
 
-try {
-  fs.writeJSONSync(pkgPath, pkgDefaults)
-} catch (err) {
-  throw err
-}*/
+  return true
+}
+
+walker.on('end', () => {
+  if (!hasPackage) {
+    injectPackage(path.join(tmpDir.name, 'package.json'))
+  }
+
+
+})
 
 setTimeout(() => {
   fs.remove(tmpDir.name, err => {
