@@ -5,6 +5,8 @@ import tmp from 'tmp'
 import md5 from 'md5'
 import path from 'path'
 
+import { walk } from 'walk'
+
 const current = path.parse(process.cwd())
 const uniqueIdentifier = md5(current)
 
@@ -19,6 +21,10 @@ let pkgDefaults = {
   }
 }
 
+const ignore = [
+  'node_modules'
+]
+
 const pkgContent = JSON.stringify(pkgDefaults, null, 2)
 let tmpDir = false
 
@@ -31,13 +37,40 @@ try {
   throw err
 }
 
+const walker = walk(process.cwd(), {
+  filters: [
+    'node_modules'
+  ]
+})
+
+let hasPackage = false
+
+walker.on('file', (root, fileStats, next) => {
+  if (fileStats.name === 'package') {
+    hasPackage = true
+  }
+
+  const file = path.join(root, fileStats.name),
+        target = path.join(tmpDir.name, path.relative(process.cwd(), file))
+
+  fs.copy(file, target, err => {
+    if (err) throw err
+    next()
+  })
+})
+
+walker.on('end', () => {
+  console.log(hasPackage)
+})
+
+/*
 const pkgPath = path.join(tmpDir.name, 'package.json')
 
 try {
   fs.writeJSONSync(pkgPath, pkgDefaults)
 } catch (err) {
   throw err
-}
+}*/
 
 setTimeout(() => {
   fs.remove(tmpDir.name, err => {
