@@ -7,7 +7,8 @@ import path from 'path'
 import { spawn } from 'child_process'
 import { walk } from 'walk'
 import bin from 'commander'
-import pkg from '../package.json'
+import chalk from 'chalk'
+import pkg from '../../package.json'
 import { exists } from '../lib/utils'
 
 bin
@@ -24,7 +25,7 @@ if (file) {
 }
 
 if (!exists(current)) {
-  console.error('Specified path doesn\'t exist!')
+  console.error(chalk.red('Specified path doesn\'t exist!'))
   process.exit(1)
 }
 
