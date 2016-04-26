@@ -7,8 +7,8 @@ import path from 'path'
 
 import { walk } from 'walk'
 
-const current = path.parse(process.cwd())
-const uniqueIdentifier = md5(current)
+const current = path.parse(process.cwd()),
+      uniqueIdentifier = md5(current)
 
 let pkgDefaults = {
   name: 'ns',
@@ -46,7 +46,7 @@ const walker = walk(process.cwd(), {
 let hasPackage = false
 
 walker.on('file', (root, fileStats, next) => {
-  if (fileStats.name === 'package') {
+  if (fileStats.name === 'package.json') {
     hasPackage = true
   }
 
