@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 import tmp from 'tmp'
 import md5 from 'md5'
 import path from 'path'
-
+import { spawn } from 'child_process'
 import { walk } from 'walk'
 
 const current = path.parse(process.cwd()),
@@ -79,11 +79,18 @@ walker.on('end', () => {
     injectPackage(path.join(tmpDir.name, 'package.json'))
   }
 
+  let oldCwd = process.cwd()
+  process.chdir(tmpDir.name)
 
-})
+  spawn('now', [], {
+    stdio: 'inherit'
+  })
 
-setTimeout(() => {
+  /*
+  process.chdir(oldCwd)
+
   fs.remove(tmpDir.name, err => {
     if (err) throw err
   })
-}, 10000)
+  */
+})
