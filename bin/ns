@@ -63,13 +63,7 @@ const walker = walk(process.cwd(), {
   ]
 })
 
-let hasPackage = false
-
 walker.on('file', (root, fileStats, next) => {
-  if (fileStats.name === 'package.json') {
-    hasPackage = true
-  }
-
   const file = path.join(root, fileStats.name),
         target = path.join(tmpDir.name, path.relative(process.cwd(), file))
 
@@ -84,29 +78,6 @@ walker.on('errors', (root, nodeStatsArray, next) => {
   next()
 })
 
-const injectPackage = path => fs.writeJSON(path, pkgDefaults, err => {
-  if (err) throw err
-})
-
-const modifyExistingPkg = path => {
-  let content
-
-  try {
-    content = fs.readFileSync(path, 'utf8')
-  } catch (err) {
-    throw err
-  }
-
-  content = JSON.parse(content)
-  Object.assign(content, pkgDefaults)
-
-  try {
-    fs.writeJSONSync(path, content)
-  } catch (err) {
-    throw err
-  }
-}
-
 const cleanup = () => fs.remove(tmpDir.name, err => {
   if (err) throw err
   process.exit()
@@ -115,11 +86,9 @@ const cleanup = () => fs.remove(tmpDir.name, err => {
 walker.on('end', () => {
   const pkgPath = path.join(tmpDir.name, 'package.json')
 
-  if (hasPackage) {
-    modifyExistingPkg(pkgPath)
-  } else {
-    injectPackage(pkgPath)
-  }
+  fs.writeJSON(pkgPath, pkgDefaults, err => {
+    if (err) throw err
+  })
 
   let oldCwd = process.cwd()
   process.chdir(tmpDir.name)
