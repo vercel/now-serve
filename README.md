@@ -4,7 +4,7 @@ This packages makes it very easy to share directories using [now](https://zeit.c
 
 ## How it works
 
-When running the `ns` command, a temporary directory gets created. Within that directory, now-serve will insert a brand new `package.json` that confirms to [now's requirements](https://zeit.co/now#get-started) and therefore contains a start script that runs a new instance of [http-server](https://www.npmjs.com/package/http-server) when being executed on our servers.
+When running the `ns` command, a temporary directory gets created. Within that directory, now-serve will insert a brand new `package.json` that confirms to [now's requirements](https://zeit.co/now#get-started) and therefore contains a start script that runs a new instance of [micro-list](https://github.com/zeit/micro-list) when being executed on our servers.
 
 All of this happens completely automatically. So after running the command, the only thing you need to do is wait a few seconds until your files have been deployed and share the link! :boom:
 

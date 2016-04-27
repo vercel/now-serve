@@ -33,10 +33,10 @@ let pkgDefaults = {
   name: 'ns',
   version: '1.0.0',
   scripts: {
-    start: bin.cmd || 'http-server ./content -s'
+    start: bin.cmd || 'list ./content'
   },
   dependencies: {
-    'http-server': 'latest'
+    'micro-list': 'latest'
   }
 }
 
@@ -48,7 +48,7 @@ if (bin.packages) {
   }
 
   if (bin.cmd) {
-    delete pkgDefaults.dependencies['http-server']
+    delete pkgDefaults.dependencies['micro-list']
   }
 }
 
