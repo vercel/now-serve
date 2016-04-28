@@ -41,3 +41,9 @@ You can find a list of all options [below](#options).
 4. Transpile the source code and watch for changes: `gulp`
 
 Yeeha! Now can use the `ns` command everywhere.
+
+## Credits
+
+- Copyright © 2016 Zeit, Inc and project authors.
+- Licensed under MIT.
+- ▲
