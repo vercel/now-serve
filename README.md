@@ -13,13 +13,13 @@ All of this happens completely automatically. So after running the command, the 
 Install it
 
 ```bash
-npm install now-serve -g
+▲ npm install now-serve -g
 ```
 
 Run it
 
 ```bash
-ns [options] <file | dir>
+▲ ns [options] <file | dir>
 ```
 
 You can find a list of all options [below](#options).
@@ -31,7 +31,7 @@ You can find a list of all options [below](#options).
 | -h, --help             | Output all available options |
 | -V, --version          | The version tag of the now-serve instance on your device |
 | -c, --cmd [command]    | The command that should be run when starting |
-| -p, --packages &#60;names&#62; | A list of custom packages to add to dependencies |
+| -p, --packages &#60;names&#62; | A list of custom packages to add to dependencies (comma-separated) |
 
 ## Contribute
 
