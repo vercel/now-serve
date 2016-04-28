@@ -12,7 +12,7 @@ import pkg from '../../package.json'
 bin
   .version(pkg.version)
   .option('-c, --cmd [command]', 'The command to run when starting')
-  .option('-p, --packages <items>', 'Custom packages to add to dependencies')
+  .option('-p, --packages <items>', 'Custom packages to add to dependencies (comma-separated)')
   .parse(process.argv)
 
 const file = bin.args[bin.args.length - 1]
