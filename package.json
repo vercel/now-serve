@@ -1,7 +1,7 @@
 {
   "name": "now-serve",
   "version": "0.1.0",
-  "description": "Quickly share directories using now",
+  "description": "Single command static hosting",
   "scripts": {
     "start": "gulp",
     "prepublish": "gulp transpile"
