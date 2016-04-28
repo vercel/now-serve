@@ -1,6 +1,6 @@
 # now-serve
 
-This packages makes it very easy to share directories using [now](https://zeit.co/now)!.
+This packages makes it very easy to share directories using [now](https://zeit.co/now)!
 
 ## How it works
 
