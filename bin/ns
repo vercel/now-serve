@@ -4,16 +4,15 @@ import fs from 'fs-extra'
 import tmp from 'tmp'
 import md5 from 'md5'
 import path from 'path'
-import bin from 'commander'
+import args from 'args'
 import { copyContents, exists, injectPackage } from '../lib/utils'
 import chalk from 'chalk'
 import pkg from '../../package.json'
 import hasbin from 'hasbin'
 
-bin
-  .version(pkg.version)
-  .option('-c, --cmd [command]', 'The command to run when starting')
-  .option('-p, --packages <items>', 'Custom packages to add to dependencies (comma-separated)')
+args
+  .option('cmd', 'The command to run when starting')
+  .option('packages', 'Custom packages to add to dependencies (comma-separated)', [])
   .parse(process.argv)
 
 if (!hasbin.sync('now')) {
@@ -23,7 +22,7 @@ if (!hasbin.sync('now')) {
   process.exit(1)
 }
 
-const file = bin.args[bin.args.length - 1]
+const file = args.args._[1]
 let current = process.cwd()
 
 if (file) {
@@ -41,21 +40,21 @@ let pkgDefaults = {
   name: 'ns',
   version: '1.0.0',
   scripts: {
-    start: bin.cmd || 'list ./content'
+    start: args.cmd || 'list ./content'
   },
   dependencies: {
     'micro-list': 'latest'
   }
 }
 
-if (bin.packages) {
-  let list = bin.packages.split(',')
+if (args.packages) {
+  let list = args.packages.split(',')
 
   for (let item of list) {
     pkgDefaults.dependencies[item] = 'latest'
   }
 
-  if (bin.cmd) {
+  if (args.cmd) {
     delete pkgDefaults.dependencies['micro-list']
   }
 }
