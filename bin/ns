@@ -12,7 +12,7 @@ import hasbin from 'hasbin'
 
 args
   .option('cmd', 'The command to run when starting')
-  .option('packages', 'Custom packages to add to dependencies (comma-separated)', [])
+  .option('packages', 'Custom packages to add to dependencies (comma-separated)')
   .parse(process.argv)
 
 if (!hasbin.sync('now')) {
