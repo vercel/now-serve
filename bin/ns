@@ -22,7 +22,7 @@ if (!hasbin.sync('now')) {
   process.exit(1)
 }
 
-const file = args.args._[1]
+const file = args.raw._[1]
 let current = process.cwd()
 
 if (file) {
