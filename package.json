@@ -17,10 +17,7 @@
   "bin": {
     "ns": "dist/bin/ns"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zeit/now-serve.git"
-  },
+  "repository": "zeit/now-serve",
   "author": "leo",
   "license": "MIT",
   "bugs": {
