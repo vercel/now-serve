@@ -13,7 +13,8 @@ import hasbin from 'hasbin'
 args
   .option('cmd', 'The command to run when starting')
   .option('packages', 'Custom packages to add to dependencies (comma-separated)')
-  .parse(process.argv)
+
+const flags = args.parse(process.argv)
 
 if (!hasbin.sync('now')) {
   console.error(chalk.red('Please install now (zeit.co/now) before continuing!'))
@@ -22,7 +23,7 @@ if (!hasbin.sync('now')) {
   process.exit(1)
 }
 
-const file = args.raw._[1]
+const file = args.sub[0]
 let current = process.cwd()
 
 if (file) {
@@ -40,21 +41,21 @@ let pkgDefaults = {
   name: 'ns',
   version: '1.0.0',
   scripts: {
-    start: args.cmd || 'list ./content'
+    start: flags.cmd || 'list ./content'
   },
   dependencies: {
     'micro-list': 'latest'
   }
 }
 
-if (args.packages) {
-  let list = args.packages.split(',')
+if (flags.packages) {
+  let list = flags.packages.split(',')
 
   for (let item of list) {
     pkgDefaults.dependencies[item] = 'latest'
   }
 
-  if (args.cmd) {
+  if (flags.cmd) {
     delete pkgDefaults.dependencies['micro-list']
   }
 }
