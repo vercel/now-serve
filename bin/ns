@@ -13,6 +13,7 @@ import hasbin from 'hasbin'
 args
   .option('cmd', 'The command to run when starting')
   .option('packages', 'Custom packages to add to dependencies (comma-separated)')
+  .option('name', 'Custom name for deployment')
 
 const flags = args.parse(process.argv)
 
@@ -58,6 +59,10 @@ if (flags.packages) {
   if (flags.cmd) {
     delete pkgDefaults.dependencies['micro-list']
   }
+}
+
+if (flags.name) {
+  pkgDefaults.name = flags.name;
 }
 
 const pkgContent = JSON.stringify(pkgDefaults, null, 2)
