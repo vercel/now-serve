@@ -2,7 +2,6 @@
 
 import fs from 'fs-extra'
 import tmp from 'tmp'
-import md5 from 'md5'
 import path from 'path'
 import args from 'args'
 import { copyContents, exists, injectPackage } from '../lib/utils'
@@ -36,8 +35,6 @@ if (!exists(current)) {
   process.exit(1)
 }
 
-const uniqueIdentifier = md5(current)
-
 let pkgDefaults = {
   name: 'ns',
   version: '1.0.0',
@@ -70,7 +67,7 @@ let tmpDir = false
 
 try {
   tmpDir = tmp.dirSync({
-    name: `now-serve-${uniqueIdentifier}`,
+    template: `now-serve-XXXXXX`,
     keep: true
   })
 } catch (err) {
