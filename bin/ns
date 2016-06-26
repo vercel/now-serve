@@ -67,7 +67,7 @@ let tmpDir = false
 
 try {
   tmpDir = tmp.dirSync({
-    template: `now-serve-XXXXXX`,
+    prefix: 'now-serve-',
     keep: true
   })
 } catch (err) {
