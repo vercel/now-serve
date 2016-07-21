@@ -1,7 +1,7 @@
-const gulp = require('gulp')
-const babel = require('gulp-babel')
-const cache = require('gulp-cached')
-const chmod = require('gulp-chmod')
+import gulp from 'gulp'
+import babel from 'gulp-babel'
+import cache from 'gulp-cached'
+import chmod from 'gulp-chmod'
 
 const paths = {
   bin: 'bin/**/*',
