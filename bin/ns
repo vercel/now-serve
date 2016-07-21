@@ -1,13 +1,18 @@
 #!/usr/bin/env node
 
+// Packages
 import fs from 'fs-extra'
 import tmp from 'tmp'
-import path from 'path'
 import args from 'args'
-import { copyContents, exists, injectPackage } from '../lib/utils'
-import chalk from 'chalk'
-import pkg from '../../package.json'
 import hasbin from 'hasbin'
+import chalk from 'chalk'
+
+// Native
+import path from 'path'
+
+// Ours
+import { copyContents, exists, injectPackage } from '../lib/utils'
+import pkg from '../../package.json'
 
 args
   .option('cmd', 'The command to run when starting')
