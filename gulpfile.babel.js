@@ -8,20 +8,16 @@ const paths = {
   lib: 'lib/**/*'
 }
 
-gulp.task('lib', () => {
-  return gulp.src(paths.lib)
+gulp.task('lib', () => gulp.src(paths.lib)
   .pipe(cache('lib'))
   .pipe(babel())
-  .pipe(gulp.dest('dist/lib'))
-})
+  .pipe(gulp.dest('dist/lib')))
 
-gulp.task('bin', () => {
-  return gulp.src(paths.bin)
+gulp.task('bin', () => gulp.src(paths.bin)
   .pipe(cache('bin'))
   .pipe(babel())
   .pipe(chmod(755))
-  .pipe(gulp.dest('dist/bin'))
-})
+  .pipe(gulp.dest('dist/bin')))
 
 gulp.task('watch', () => {
   gulp.watch(paths.lib, ['lib'])
