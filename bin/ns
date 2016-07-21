@@ -64,7 +64,7 @@ if (flags.packages) {
 }
 
 if (flags.name) {
-  pkgDefaults.name = flags.name;
+  pkgDefaults.name = flags.name
 }
 
 const pkgContent = JSON.stringify(pkgDefaults, null, 2)
