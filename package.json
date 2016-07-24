@@ -5,7 +5,7 @@
   "scripts": {
     "start": "gulp",
     "prepublish": "gulp transpile",
-    "test": "eslint bin/** lib/** *.js"
+    "test": "xo"
   },
   "files": [
     "dist"
@@ -21,8 +21,13 @@
   "repository": "zeit/now-serve",
   "author": "leo",
   "license": "MIT",
-  "eslintConfig": {
-    "extends": "default"
+  "xo": {
+    "esnext": true,
+    "space": true,
+    "semicolon": false,
+    "rules": {
+      "xo/no-process-exit": 0
+    }
   },
   "bugs": {
     "url": "https://github.com/zeit/now-serve/issues"
@@ -31,12 +36,11 @@
   "devDependencies": {
     "babel-preset-es2015": "6.9.0",
     "babel-register": "^6.9.0",
-    "eslint": "^3.1.1",
-    "eslint-config-default": "^0.2.1",
     "gulp": "3.9.1",
     "gulp-babel": "6.1.2",
     "gulp-cached": "1.1.0",
-    "gulp-chmod": "1.3.0"
+    "gulp-chmod": "1.3.0",
+    "xo": "^0.16.0"
   },
   "dependencies": {
     "args": "1.3.0",

@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// Native
+import path from 'path'
+
 // Packages
 import fs from 'fs-extra'
 import tmp from 'tmp'
@@ -7,12 +10,8 @@ import args from 'args'
 import hasbin from 'hasbin'
 import chalk from 'chalk'
 
-// Native
-import path from 'path'
-
 // Ours
-import { copyContents, exists, injectPackage } from '../lib/utils'
-import pkg from '../../package.json'
+import {copyContents, exists, injectPackage} from '../lib/utils'
 
 args
   .option('cmd', 'The command to run when starting')
@@ -40,7 +39,7 @@ if (!exists(current)) {
   process.exit(1)
 }
 
-let pkgDefaults = {
+const pkgDefaults = {
   name: 'ns',
   version: '1.0.0',
   scripts: {
@@ -52,9 +51,9 @@ let pkgDefaults = {
 }
 
 if (flags.packages) {
-  let list = flags.packages.split(',')
+  const list = flags.packages.split(',')
 
-  for (let item of list) {
+  for (const item of list) {
     pkgDefaults.dependencies[item] = 'latest'
   }
 
@@ -67,7 +66,6 @@ if (flags.name) {
   pkgDefaults.name = flags.name
 }
 
-const pkgContent = JSON.stringify(pkgDefaults, null, 2)
 let tmpDir = false
 
 try {
@@ -84,11 +82,14 @@ const details = fs.lstatSync(current)
 if (details.isDirectory()) {
   copyContents(current, tmpDir.name, pkgDefaults)
 } else if (details.isFile()) {
-  const fileName = path.parse(current).base,
-        target = path.join(tmpDir.name, '/content', fileName)
+  const fileName = path.parse(current).base
+  const target = path.join(tmpDir.name, '/content', fileName)
 
   fs.copy(current, target, err => {
-    if (err) throw err
+    if (err) {
+      throw err
+    }
+
     injectPackage(tmpDir.name, pkgDefaults)
   })
 } else {
