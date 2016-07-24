@@ -29,6 +29,9 @@
       "xo/no-process-exit": 0
     }
   },
+  "greenkeeper": {
+    "emails": false
+  },
   "bugs": {
     "url": "https://github.com/zeit/now-serve/issues"
   },
