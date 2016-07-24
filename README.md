@@ -13,7 +13,7 @@ All of this happens completely automatically. So after running the command, the 
 
 ## Usage
 
-Install it
+Install it (needs at least node v6)
 
 ```bash
 ▲ npm install now-serve -g
