@@ -1,9 +1,9 @@
 # now-serve
 
-> This packages makes it very easy to [share directories](https://zeit.co/blog/serve-it-now) using [now](https://zeit.co/now)!
-
 [![Slack Channel](https://zeit-slackin.now.sh/badge.svg)](https://zeit.chat/)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
+
+> This packages makes it very easy to [share directories](https://zeit.co/blog/serve-it-now) using [now](https://zeit.co/now)!
 
 ## How it works
 

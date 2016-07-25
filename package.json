@@ -1,6 +1,6 @@
 {
   "name": "now-serve",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Single command static hosting",
   "scripts": {
     "start": "gulp",
