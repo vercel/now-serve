@@ -77,6 +77,8 @@ try {
     // Because if we don't use the same id every time,
     // now won't update the existing deployment and create a new one instead
     name: `now-serve-${uniqueIdentifier}`,
+
+    // Keep it, because we'll remove it manually later
     keep: true
   })
 } catch (err) {
