@@ -9,6 +9,7 @@ import tmp from 'tmp'
 import args from 'args'
 import hasbin from 'hasbin'
 import chalk from 'chalk'
+import md5 from 'md5'
 
 // Ours
 import {copyContents, exists, injectPackage} from '../lib/utils'
@@ -38,6 +39,8 @@ if (!exists(current)) {
   console.error(chalk.red('Specified path doesn\'t exist!'))
   process.exit(1)
 }
+
+const uniqueIdentifier = md5(current)
 
 const pkgDefaults = {
   name: 'ns',
@@ -70,7 +73,10 @@ let tmpDir = false
 
 try {
   tmpDir = tmp.dirSync({
-    prefix: 'now-serve-',
+    // We need to use the hased directory identifier
+    // Because if we don't use the same id every time,
+    // now won't update the existing deployment and create a new one instead
+    name: `now-serve-${uniqueIdentifier}`,
     keep: true
   })
 } catch (err) {
