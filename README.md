@@ -37,7 +37,7 @@ You can find a list of all options [below](#options).
 | -c, --cmd [command]            | The command that should be run when starting |
 | -n, --name [name]              | The name for your deployment |
 | -p, --packages &#60;names&#62; | Custom packages to add to dependencies: `"gulp, koa"` |
-| -f, --flags [flags]            | A string containing flags that will be passed on to now: `"force, debug"` |
+| -a, --arguments <handles>        | A string containing arguments that will be passed on to now: `"force, debug"` |
 
 ## Contribute
 
