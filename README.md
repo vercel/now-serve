@@ -30,13 +30,14 @@ You can find a list of all options [below](#options).
 
 ### Options
 
-| Usage                  | Description |
-| ---------------------- | ----------- |
-| -h, --help             | Output all available options |
-| -V, --version          | The version tag of the now-serve instance on your device |
-| -c, --cmd [command]    | The command that should be run when starting |
-| -n, --name [name]    | The name for your deployment |
-| -p, --packages &#60;names&#62; | A list of custom packages to add to dependencies (comma-separated) |
+| Usage                          | Description |
+| ------------------------------ | ----------- |
+| -h, --help                     | Output all available options |
+| -V, --version                  | The version tag of the now-serve instance on your device |
+| -c, --cmd [command]            | The command that should be run when starting |
+| -n, --name [name]              | The name for your deployment |
+| -p, --packages &#60;names&#62; | Custom packages to add to dependencies (comma-separated) |
+| -f, --flags [flags]            | A string containing flags that will be passed on to now |
 
 ## Contribute
 

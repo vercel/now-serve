@@ -18,6 +18,7 @@ args
   .option('cmd', 'The command to run when starting')
   .option('packages', 'Custom packages to add to dependencies (comma-separated)')
   .option('name', 'Custom name for deployment')
+  .option('arguments', 'Flags that you want to pass to now')
 
 const flags = args.parse(process.argv)
 
@@ -88,7 +89,7 @@ try {
 const details = fs.lstatSync(current)
 
 if (details.isDirectory()) {
-  copyContents(current, tmpDir.name, pkgDefaults)
+  copyContents(current, tmpDir.name, pkgDefaults, flags.arguments)
 } else if (details.isFile()) {
   const fileName = path.parse(current).base
   const target = path.join(tmpDir.name, '/content', fileName)
@@ -98,7 +99,7 @@ if (details.isDirectory()) {
       throw err
     }
 
-    injectPackage(tmpDir.name, pkgDefaults)
+    injectPackage(tmpDir.name, pkgDefaults, flags.arguments)
   })
 } else {
   console.error(chalk.red('Path is neither a file nor a directory!'))
