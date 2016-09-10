@@ -17,13 +17,13 @@ All of this happens completely automatically. So after running the command, the 
 Install it (needs at least node v6)
 
 ```bash
-▲ npm install now-serve -g
+$ npm install now-serve -g
 ```
 
 Run it
 
 ```bash
-▲ ns [options] <file | dir>
+$ ns [options] <file | dir>
 ```
 
 You can find a list of all options [below](#options).
@@ -47,9 +47,3 @@ You can find a list of all options [below](#options).
 4. Transpile the source code and watch for changes: `npm start`
 
 Yeeha! Now can use the `ns` command everywhere.
-
-## Credits
-
-- Copyright © 2016 Zeit, Inc and project authors.
-- Licensed under MIT.
-- ▲
