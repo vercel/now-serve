@@ -34,10 +34,10 @@ You can find a list of all options [below](#options).
 | ------------------------------ | ----------- |
 | -h, --help                     | Output all available options |
 | -V, --version                  | The version tag of the now-serve instance on your device |
-| -c, --cmd [command]            | The command that should be run when starting |
+| &#8209;c,&nbsp;&#8209;&#8209;cmd&nbsp;[command]            | The command that should be run when starting |
 | -n, --name [name]              | The name for your deployment |
-| -p, --packages &#60;names&#62; | Custom packages to add to dependencies: `"gulp, koa"` |
-| -a, --arguments <handles>        | A string containing arguments that will be passed on to now: `"force, debug"` |
+| &#8209;p,&nbsp;&#8209;&#8209;packages&nbsp;&#60;names&#62; | Custom packages to add to dependencies: `"gulp, koa"` |
+| -a, --arguments <handles>      | A string containing arguments that will be passed on to now: `"force, debug"` (basically the names of the flags but without dashes) |
 
 ## Contribute
 
