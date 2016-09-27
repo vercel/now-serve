@@ -39,6 +39,14 @@ You can find a list of all options [below](#options).
 | &#8209;p,&nbsp;&#8209;&#8209;packages&nbsp;&#60;names&#62; | Custom packages to add to dependencies: `"gulp, koa"` |
 | -a, --arguments <handles>      | A string containing arguments that will be passed on to now: `"force, debug"` (basically the names of the flags but without dashes) |
 
+### Single Page Applications
+
+Single page apps that use client side routing must serve the `index.html` file. With now, this will be deployed to the `./content` directory. Assuming `index.html` is in the root of your deploy directory, your can deploy with this:
+
+```bash
+ns --cmd "list ./content -s"
+```
+
 ## Contribute
 
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device
