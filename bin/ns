@@ -31,7 +31,7 @@ if (!hasbin.sync('now')) {
 }
 
 if (flags.cmd && flags.single) {
-  console.log('The "single" flag only works if you\'re not using a custom command')
+  console.log(chalk.red('The "single" flag only works if you\'re not using a custom command'))
 }
 
 const file = args.sub[0]
