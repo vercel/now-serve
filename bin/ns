@@ -19,6 +19,7 @@ args
   .option('packages', 'Custom packages to add to dependencies (comma-separated)')
   .option('name', 'Custom name for deployment')
   .option('arguments', 'Flags that you want to pass to now')
+  .option('single', 'Serve single page apps with just one index.html')
 
 const flags = args.parse(process.argv)
 
@@ -27,6 +28,10 @@ if (!hasbin.sync('now')) {
   console.log(chalk.grey('▲ npm install -g now'))
 
   process.exit(1)
+}
+
+if (flags.cmd && flags.single) {
+  console.log('The "single" flag only works if you\'re not using a custom command')
 }
 
 const file = args.sub[0]
@@ -42,12 +47,13 @@ if (!exists(current)) {
 }
 
 const uniqueIdentifier = md5(current)
+const listCommand = 'list ./content' + (flags.single ? ' -s' : '')
 
 const pkgDefaults = {
   name: 'ns',
   version: '1.0.0',
   scripts: {
-    start: flags.cmd || 'list ./content'
+    start: flags.cmd || listCommand
   },
   dependencies: {
     'micro-list': 'latest'

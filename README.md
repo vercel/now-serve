@@ -38,14 +38,7 @@ You can find a list of all options [below](#options).
 | -n, --name [name]              | The name for your deployment |
 | &#8209;p,&nbsp;&#8209;&#8209;packages&nbsp;&#60;names&#62; | Custom packages to add to dependencies: `"gulp, koa"` |
 | -a, --arguments <handles>      | A string containing arguments that will be passed on to now: `"force, debug"` (basically the names of the flags but without dashes) |
-
-### Single Page Applications
-
-Single page apps that use client side routing must serve the `index.html` file. With now, this will be deployed to the `./content` directory. Assuming `index.html` is in the root of your deploy directory, your can deploy with this:
-
-```bash
-ns --cmd "list ./content -s"
-```
+| -s, --single                   | Serve single page apps with only one `index.html` in the root directory |
 
 ## Contribute
 
