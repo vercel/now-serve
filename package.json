@@ -26,7 +26,7 @@
     "space": true,
     "semicolon": false,
     "rules": {
-      "xo/no-process-exit": 0
+      "unicorn/no-process-exit": 0
     }
   },
   "greenkeeper": {
