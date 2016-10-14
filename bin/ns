@@ -12,7 +12,7 @@ import chalk from 'chalk'
 import md5 from 'md5'
 
 // Ours
-import {copyContents, exists, injectPackage} from '../lib/utils'
+import {copyContents, injectPackage} from '../lib/utils'
 
 args
   .option('cmd', 'The command to run when starting')
@@ -41,7 +41,7 @@ if (file) {
   current = path.resolve(process.cwd(), file)
 }
 
-if (!exists(current)) {
+if (!fs.existsSync(current)) {
   console.error(chalk.red('Specified path doesn\'t exist!'))
   process.exit(1)
 }
@@ -56,7 +56,7 @@ const pkgDefaults = {
     start: flags.cmd || listCommand
   },
   dependencies: {
-    'list': 'latest'
+    list: 'latest'
   }
 }
 
@@ -68,7 +68,7 @@ if (flags.packages) {
   }
 
   if (flags.cmd) {
-    delete pkgDefaults.dependencies['list']
+    delete pkgDefaults.dependencies.list
   }
 }
 
