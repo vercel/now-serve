@@ -51,11 +51,11 @@ const uniqueIdentifier = md5(current)
 let listCommand = 'list ./content'
 
 if (flags.single) {
-  listCommand + ' -s'
+  listCommand += ' -s'
 }
 
 if(flags.cache) {
-  listCommand + ' -c ' + flags.cache
+  listCommand += ' -c ' + flags.cache
 }
 
 const pkgDefaults = {
