@@ -20,6 +20,7 @@ args
   .option('name', 'Custom name for deployment')
   .option('arguments', 'Flags that you want to pass to now')
   .option('single', 'Serve single page apps with just one index.html')
+  .option('cache', 'How long static files should be cached in the browser')
 
 const flags = args.parse(process.argv)
 
@@ -47,7 +48,15 @@ if (!fs.existsSync(current)) {
 }
 
 const uniqueIdentifier = md5(current)
-const listCommand = 'list ./content' + (flags.single ? ' -s' : '')
+let listCommand = 'list ./content'
+
+if (flags.single) {
+  listCommand += ' -s'
+}
+
+if(flags.cache) {
+  listCommand += ' -c ' + flags.cache
+}
 
 const pkgDefaults = {
   name: 'ns',
