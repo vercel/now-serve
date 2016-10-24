@@ -39,7 +39,7 @@ You can find a list of all options [below](#options).
 | &#8209;p,&nbsp;&#8209;&#8209;packages&nbsp;&#60;names&#62; | Custom packages to add to dependencies: `"gulp, koa"` |
 | -a, --arguments <handles>      | A string containing arguments that will be passed on to now: `"force, debug"` (basically the names of the flags but without dashes) |
 | -s, --single                   | Serve single page apps with only one `index.html` in the root directory |
-| -c, --cache [seconds]          | How long static files should be cached in the browser |
+| --cache [seconds]          | How long static files should be cached in the browser |
 
 ## Contribute
 
